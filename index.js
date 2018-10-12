@@ -40,16 +40,6 @@ function getRepositories() {
 }
 
 
-
-function getCommits(el) {
-  const name = el.dataset.repo;
-  const req = new XMLHttpRequest();
-  req.addEventListener('load', showCommits);
-  req.open('GET', 'https://api.github.com/repos/octocat/' + name + '/commits');
-  req.send();
-}
-
-
 function showCommits() {
   const commits = JSON.parse(this.responseText);
   const commitsList = `<ul>${commits
@@ -63,4 +53,12 @@ function showCommits() {
     )
     .join('')}</ul>`;
   document.getElementById('commits').innerHTML = commitsList;
+}
+
+function getCommits(el) {
+  const name = el.dataset.repo;
+  const req = new XMLHttpRequest();
+  req.addEventListener('load', showCommits);
+  req.open('GET', 'https://api.github.com/repos/octocat/' + name + '/commits');
+  req.send();
 }
